@@ -1,4 +1,31 @@
-<script>
-    var variable;
-    
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        console.log("INT + NO DECLARADO");
+        var a = 1;
+        var b;
+        var resultado = a + b;
+        console.log("Resultado1 es:" + resultado + " y es de tipo: " + typeof(resultado));
+
+        console.log("STRING + NO DECLARADO");
+        var c = "CADENA";
+        var d;
+        var resultado2 = c + d;
+        console.log("Resultado2 es:" + resultado2 + " y es de tipo: " + typeof(resultado2)); 
+
+        console.log("STRING + INT");
+        var e = "CADENA";
+        var f = 1492;
+        var resultado3 = e + f;
+        console.log("Resultado3 es:" + resultado3 + " y es de tipo: " + typeof(resultado3)); 
+
+    </script>
+</body>
+</html>
