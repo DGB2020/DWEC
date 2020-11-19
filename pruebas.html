@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="utilidades/utilidades.js"></script>
+</head>
+<body>
+    <script>
+
+    class Coche {
+        constructor(nombre,color,km,arrancado){
+            this.nombre = nombre;
+            this.color = color;
+            this.km = km;
+            this.arrancado = arrancado;
+        }
+        arrancar(){
+            this.arrancado = true;
+        }
+    }
+    var cochenuevo = new Coche("opel","azul",0,false);
+    var coche2 = new Coche();
+
+    UtilidadesCopia.copiaObjetoAssign(cochenuevo,coche2);
+    console.log(coche2);
+    </script>
+</body>
+</html>
