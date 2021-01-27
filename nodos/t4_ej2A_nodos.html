@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .visible {
+            visibility: visible;
+        }
+
+        .invisible {
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body onload="crear()">
+    <script>
+        function crear() {
+
+            var cont = document.createElement("div");
+            cont.id = "contenedor";
+            cont.className = "visible";
+            console.log(cont);
+            document.body.appendChild(cont);
+
+            var parrafo = document.createElement("p");
+            parrafo.innerText = "parrafo";
+            cont.appendChild(parrafo);
+
+            var input = document.createElement("input");
+            input.type = "text"
+            cont.appendChild(input);
+
+            var espaciador = document.createElement("br");
+            cont.appendChild(espaciador);
+
+            var espaciador = document.createElement("hr");
+            cont.appendChild(espaciador);
+
+            for (x = 0; x <= 50; x++) {
+
+                var button = document.createElement("button");
+                button.textContent = "Boton" + x;
+                cont.appendChild(button);
+
+            }
+
+            cont.appendChild(espaciador);
+            var boton2 = document.createElement("button");
+            boton2.id = "botonCambio";
+            boton2.addEventListener("click", cambiarVisibilidad, false);
+            boton2.textContent = "OCULTAR";
+            document.body.appendChild(boton2);
+
+        }
+
+        function cambiarVisibilidad() {
+
+            var div = document.getElementById('contenedor');
+            if (div.className == "visible") {
+                div.className = "invisible";
+                document.getElementById("botonCambio").innerText = "MOSTRAR";
+                boton2.innerText = "MOSTRAR"
+            } else {
+                div.className = "visible";
+                document.getElementById("botonCambio").innerText = "OCULTAR";
+            }
+
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 30em;
+            height: 6em;
+            background-color: cornflowerblue;
+        }
+    </style>
+</head>
+
+<body onload="inicio()">
+    <button id="miboton">Mi boton</button>
+
+    <div></div>
+
+    <script>
+        function inicio(){
+            //apartado 1
+            document.getElementById("miboton").addEventListener("click", (e) => {
+                if (e == window.event) {
+                    alert("es igual al ultimo");
+                   
+                    console.dir(e.target);
+                }
+            }, false);
+            
+            //apartado 2
+            document.querySelector("div").addEventListener("click", (e) => {
+        
+                alert("Has hecho click en el contenedor");
+
+            }, false);
+
+
+
+            for(x=1;x<=51;x++){
+                var boton = document.createElement("button");
+                boton.innerText = x;
+                
+                boton.addEventListener("click", (e) => {
+     
+                    alert(e.target.innerText);
+           
+                }, false);
+           
+                
+                document.querySelector("div").appendChild(boton);
+
+            }
+
+            
+
+
+        }
+
+
+    </script>
+</body>
+
+</html>

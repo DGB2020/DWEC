@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body onload="consultarNodosDOM()">
+    <h2 class="importante">Titulo importante</h2>
+    <p id="miParrafo"> Parrafo con id miParrafo</p>
+    <p class="importante"> Parrafo importante</p>
+    <input type="text" id="inputText">
+    <button type="button" name="button">Guardar</button>
+</body>
+<script>
+    function consultarNodosDOM() {
+
+        var titulo = document.getElementsByTagName('h2')[0].innerHTML;
+
+        var parrafoConId = document.getElementById('miParrafo').innerHTML;
+
+        var parrafoImportante = document.getElementsByClassName('importante')[1].innerHTML;
+
+        var inputText = document.getElementById('inputText').value;
+
+        var botonContenido = document.querySelector('button').innerHTML;
+        console.log(titulo, parrafoConId, parrafoImportante, inputText, botonContenido);
+        console.dir(titulo, parrafoConId, parrafoImportante, inputText, botonContenido);
+    }
+</script>
+
+</html>

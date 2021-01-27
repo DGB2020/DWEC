@@ -32,7 +32,7 @@ class Coche {
         this.arrancado = true;
     }
 }
-var cochenuevo = new Coche("opel","azul",0,false)
+var cochenuevo = new Coche("opel","azul",0,false);
 //con constructor vacio
 
 class Moto {
