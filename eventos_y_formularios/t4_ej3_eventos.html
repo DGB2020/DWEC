@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,18 +12,15 @@
         }
     </style>
 </head>
-
 <body onload="inicio()">
     <button id="miboton">Mi boton</button>
-
     <div></div>
-
     <script>
         function inicio(){
             //apartado 1
             document.getElementById("miboton").addEventListener("click", (e) => {
                 if (e == window.event) {
-                    alert("es igual al ultimo");
+                    console.log("es igual al ultimo");
                    
                     console.dir(e.target);
                 }
@@ -36,8 +32,6 @@
                 alert("Has hecho click en el contenedor");
 
             }, false);
-
-
 
             for(x=1;x<=51;x++){
                 var boton = document.createElement("button");
@@ -53,12 +47,7 @@
                 document.querySelector("div").appendChild(boton);
 
             }
-
-            
-
-
         }
-
 
     </script>
 </body>

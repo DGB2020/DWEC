@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body onload="inicio()">
+    <div id="menulateral">
+        <form id="contactar" name="contactar">
+            Correo <input type="text" id="mail" placeholder="Escriba su correo" minlength="1"><br>
+            Nombre <input type="text" id="nombre" placeholder="Escriba su nombre"><br>
+            Apellidos <input type="text" id="apellidos" placeholder="Escriba su apellido"><br>
+            <label for="checkConforme">Está conforme en compartir esta información</label>
+            <input type="checkbox" id="checkConforme">
+            <input type="button" id="btnValidar" value="Validar">
+            <button id="btnEnviar" >Enviar</button>
+        </form>
+    </div>
+    <br><br>
+    <script>
+
+        function inicio() {
+        
+            var btnValidar = document.getElementById("btnValidar");
+            btnValidar.addEventListener("click", () => {
+                validarTodos();
+            });
+
+            document.getElementById('btnEnviar').disabled = true;
+
+        }
+
+        function validarTodos() {
+
+            if(validarNombre()){
+                alert("nombre bien");
+            }
+
+            if(validarCorreo()){
+                alert("CORREO BIEN");
+            }
+
+
+        
+                document.getElementById('btnEnviar').disabled = false;
+            
+        }
+
+        //funciones apartado 10
+        function validarCorreo() {
+            var inpuC = document.getElementById("mail");
+
+            var expresion = new RegExp(/[a-zA-Z]*@[a-zA-Z].[a-zA-Z]/);
+
+            if (expresion.test(inpuC.value)) {
+                recuadroNormal(inpuC);
+                return true;
+            } else {
+                inpuC.value = "Escriba un correo válido";
+                recuadroRojo(inpuC);
+                return false;
+            }
+        }
+
+        function validarNombre() {
+            alert("validr nombre");
+            var inputN = document.getElementById("nombre");
+            if (inputN.value == "" || inputN.value == "Escriba un nombre" || inputN.value == "El nombre no puede ser un número"){
+                inputN.value = "Escriba un nombre";
+                recuadroRojo(inputN);
+                return false;
+            }
+            else {
+                if(!isNaN(inputN.value)){
+                    inputN.value == "El nombre no puede ser un número";
+                    recuadroRojo(inputN);
+                    return false;
+                }
+                else {
+                    recuadroNormal(inputN);
+                    return true;
+                }
+
+            }
+        }
+
+
+
+        function recuadroRojo(input) {
+            input.style.borderColor = "red";
+            input.style.borderWidth = "3px";
+        }
+
+        function recuadroNormal(input) {
+            input.style.borderColor = "transparent";
+            input.style.borderWidth = "0px";
+        }
+
+        function activarBotonEnvio() {
+
+        }
+
+    </script>
+</body>
+</body>
+
+</html>

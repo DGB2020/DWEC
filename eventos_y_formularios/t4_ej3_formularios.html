@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,60 +10,95 @@
 <body onload="inicio()">
     <div id="menulateral">
         <form id="contactar" name="contactar">
-            Correo <input type="text" id="mail" value="correoPorDefecto"><br>
+            Correo <input type="text" id="mail" value="correoPorDefecto" required maxlength="11" minlength="1"><br>
             Nombre <input type="text" id="nombre" value="nombrePorDefecto"><br>
             Apellidos <input type="text" id="apellidos"><br>
             <label for="checkConforme">Está conforme en compartir esta información</label>
             <input type="checkbox" id="checkConforme">
             <input type="button" id="btnLimpiar" value="Limpiar">
-            <button id="btnEnviar">Enviar</button>
+            <button id="btnEnviar" disabled>Enviar</button>
         </form>
     </div>
     <br><br>
     <script>
-
         function inicio() {
 
-                //APARTADO 5
-                console.log("APARTADO 5");
-                var formulario1 = document.forms[0];
-                console.dir(formulario1);
-                console.log(formulario1.action);
+            //APARTADO 5-----------------------------------------------------------------
+            console.log("APARTADO 5");
+            var formulario1 = document.forms[0];
+            console.dir(formulario1);
+            console.log(formulario1.action);
 
-                //APARTADO 6
-                console.log("APARTADO 6");                                
+            //APARTADO 6-----------------------------------------------------------------
+            console.log("APARTADO 6");
+            Array.from(formulario1.elements).forEach(element => {
+                console.log(element);
+            });
+
+            //APARTADO 7-----------------------------------------------------------------
+            console.log("APARTADO 7");
+            document.getElementById("btnLimpiar").addEventListener("click", () => {
+
                 Array.from(formulario1.elements).forEach(element => {
-                    console.log(element);
-                });
-                
-                //APARTADO 7
-                console.log("APARTADO 7");       
-                document.getElementById("btnLimpiar").addEventListener("click",() =>{
-
-                    Array.from(formulario1.elements).forEach(element => {
-                        if(element.nodeType = "text"){
-                            element.value = "";
-                            console.log("El input de " + element.id + " ahora contiene: " + element.value + ".");
-                        }
-                    });
-
-                },false)
-
-                //APARTADO 8            
-                var comunidades= ["Andalucía", "Aragón", "Canarias", "Cantabria", "Castilla y León", "Castilla-La Mancha", "Cataluña", "Ceuta", "Comunidad Valenciana", "Comunidad de Madrid", "Extremadura", "Galicia", "Islas Baleares", "La Rioja", "Melilla", "Navarra", "País Vasco", "Principado de Asturias", "Región de Murcia"];
-                var selectComunidades = document.createElement("select");
-                comunidades.forEach(element => {
-                    var opcion = document.createElement("option");
-                    opcion.value = element;
-                    opcion.innerHTML = element;
-                    selectComunidades.appendChild(opcion);
+                    if (element.type = "text") {
+                        element.value = "";
+                        console.log("El input de " + element.id + " ahora contiene: " + element.value +
+                            ".");
+                    }
                 });
 
-                var divLateral = document.getElementById("menulateral");
+            }, false)
 
-                divLateral.appendChild(selectComunidades);
+            //APARTADO 8-----------------------------------------------------------------            
+            var comunidades = ["Andalucía", "Aragón", "Canarias", "Cantabria", "Castilla y León", "Castilla-La Mancha",
+                "Cataluña", "Ceuta", "Comunidad Valenciana", "Comunidad de Madrid", "Extremadura", "Galicia",
+                "Islas Baleares", "La Rioja", "Melilla", "Navarra", "País Vasco", "Principado de Asturias",
+                "Región de Murcia"
+            ];
+            var selectComunidades = document.createElement("select");
+            comunidades.forEach(element => {
+                var opcion = document.createElement("option");
+                opcion.value = element;
+                opcion.innerHTML = element;
+                selectComunidades.appendChild(opcion);
+            });
+
+            var divLateral = document.getElementById("menulateral");
+            divLateral.appendChild(selectComunidades);
+
+            //APARTADO 10------------------------------------------------------------------
+            var inputCorreo = document.getElementById("mail");
+            inputCorreo.addEventListener("change", () => {
+                validarCorreo();
+            });
 
         }
+
+        function validarTodos(){
+
+        }
+
+        function recuadroRojo(input){
+            input.style.borderColor = "blue"; 
+            input.style.borderWidth = "10px";
+        }
+
+        function recuadroNormal(input){
+            input.style.borderColor = "transparent"; 
+            input.style.borderWidth = "0px";
+        }
+
+        //funciones apartado 10
+        function validarCorreo() {
+            var inpuC = document.getElementById("mail");
+
+            if (/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(inpuC)) {
+                inpuC.innerHTML = "Menuda mierda de correo";
+                recuadroRojo(inpuC);
+            }
+
+        }
+          
     </script>
 </body>
 </body>
