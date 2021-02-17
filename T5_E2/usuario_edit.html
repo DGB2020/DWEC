@@ -21,36 +21,45 @@
     <script>
         $(document).ready(function () {
 
-                    //boton 1
-                    $(btnVolver).click(() => {
-                        history.back();
-                    });
-
-                    //boton 2
-                    $(btnGuardar).click(() => {
-
-                        var nombre = $("#inputNombre").val();
-                        //var nombre = $(inputNombre).val();
-
-                        var apellidos = $("#inputApellidos").val();
-                        var email = $("#inputEmail").val();
-
-                        alert("tenemos:" + nombre + ", " + apellidos + ", " + email);
-
-                        var url = "https://reqres.in/api/users/" + JSON.stringify(nombre, apellidos, email);
+            //recuperamos 
+            const params = new URLSearchParams(window.location.search);
+            var idUsuario = params.get('id');
 
 
-                        $.get("https://reqres.in/api/users", function (data, status) {
+            //boton 1
+            $(btnVolver).click(() => {
+                history.back();
+            });
 
-                            console.log("Data: " + data + "\nStatus: " + status);
-                            console.dir(data);
+            //boton 2
+            $(btnGuardar).click(() => {
 
- 
+                var nombreUsuario = $("#inputNombre").val();
+                //var nombre = $(inputNombre).val();
 
+                var apellidosUsuario = $("#inputApellidos").val();
+                var emailUsuario = $("#inputEmail").val();
 
-                        });
+                alert("tenemos: " + nombreUsuario + ", " + apellidosUsuario + ", " + emailUsuario);
 
-                    });
+                $.ajax({
+                    url: "https://reqres.in/api/users",
+                    type: "PUT",
+                    data: {
+                        first_name: nombreUsuario,
+                        last_name: apellidosUsuario,
+                        email: emailUsuario
+
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        alert(response);
+                    }
+                });
+
+            });
+
+        });
     </script>
 </body>
 
