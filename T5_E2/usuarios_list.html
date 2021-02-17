@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+l
+</head>
+
+<body>
+    <h2>Usuarios</h2>
+    <script>
+        $(document).ready(function () {
+
+            $.get("https://reqres.in/api/users", function (data, status) {
+
+                console.log("Data: " + data + "\nStatus: " + status);
+                console.dir(data);
+
+                //cada elemento del array data del objeto data es un usuario
+                data.data.forEach(element => {
+
+                    //creamos una seccion por usuario
+                    var section = document.createElement("section");
+
+                    //creamos la imagen
+                    var img = document.createElement("img");
+                    img.src = element.avatar;
+                    if(element.first_name == "Janet"){
+                        $(img).css("border","10px solid transparent");
+                        $(img).css("border-image","url('https://i.gyazo.com/thumb/1000/df85ef0903d5ba5e865adb029a8c17bd-png.png') 100% round");
+                    }
+
+                    //creamos el correo
+                    var p = document.createElement("p");
+                    p.innerHTML = element.email;
+
+                    //creamos el boton de guardar (apartado 5)
+
+                    var botonEditar = document.createElement("button");
+                    $(botonEditar).text("Editar");
+                    $(botonEditar).click(() => {
+                        window.location.assign("usuario_edit.html?id=" + element.id);
+                    });
+
+                    //añadimos los elementos
+                    $(section).append(img, p, botonEditar);
+                    $("body").append(section);
+
+                });
+
+                //creamos el boton final y lo añadimos
+                var btnCrear = document.createElement("button");
+                btnCrear.id = "btnCrear";
+                btnCrear.innerHTML = "Crear usuario";
+                $(btnCrear).click(() => {
+
+                    window.location.assign("usuario_edit.html");
+                });
+                $("body").append(btnCrear);
+
+            });
+        });
+    </script>
+</body>
+
+</html>

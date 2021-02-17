@@ -1,0 +1,40 @@
+* { border-radius: 0.5em;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+body {
+    background-color: brown;
+}
+
+section {
+    background-color: tan;
+    border: 2px ridge rgb(90, 27, 27);
+    margin: 1em;
+    width: 45%;
+    float: left;
+}
+
+section button {
+    float: right;
+    margin-bottom: 2em;
+    margin-right: 2em;
+}
+
+img {
+    margin: 1em;
+    float: left;
+    filter: sepia(0.2);
+}
+
+p {
+    padding-left: 10em;
+    padding-top: 4em;
+}
+
+button,
+h2 {
+    padding: 0.5em;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-transform: uppercase;
+    margin-left: 3em;
+}
