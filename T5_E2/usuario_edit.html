@@ -21,47 +21,36 @@
     <script>
         $(document).ready(function () {
 
-            //boton 1
-            $(btnVolver).click(() => {
-                history.back();
-            });
+                    //boton 1
+                    $(btnVolver).click(() => {
+                        history.back();
+                    });
 
-            //boton 2
-            $(btnGuardar).click(() => {
+                    //boton 2
+                    $(btnGuardar).click(() => {
 
-                var nombre = $("#inputNombre").val();
-                //var nombre = $(inputNombre).val();
+                        var nombre = $("#inputNombre").val();
+                        //var nombre = $(inputNombre).val();
 
-                var apellidos = $("#inputApellidos").val();
-                var email = $("#inputEmail").val();
+                        var apellidos = $("#inputApellidos").val();
+                        var email = $("#inputEmail").val();
 
-                alert("tenemos:" + nombre + ", " + apellidos + ", " + email);
+                        alert("tenemos:" + nombre + ", " + apellidos + ", " + email);
 
-                var url = "https://reqres.in/api/users/" + JSON.stringify(nombre, apellidos, email);
-
-
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function () { // función callback (procesa la respuesta) //
-                    if (this.readyState == 4 && this.status == 201) {
-                        console.log(response);
-                        alert(this.response)
-                    }
-                };
-                
-                xmlhttp.open("POST", url, true); // true indica peticion async //
-                xmlhttp.send();
-
-                /*
-                $.post(url, function (data, status) {
+                        var url = "https://reqres.in/api/users/" + JSON.stringify(nombre, apellidos, email);
 
 
+                        $.get("https://reqres.in/api/users", function (data, status) {
 
-                    alert(status);
-                });
-                */
-            });
+                            console.log("Data: " + data + "\nStatus: " + status);
+                            console.dir(data);
 
-        });
+ 
+
+
+                        });
+
+                    });
     </script>
 </body>
 
