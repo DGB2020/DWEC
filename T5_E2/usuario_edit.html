@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -15,46 +15,60 @@
         <input type="text" name="apellidos" id=inputApellidos>Apellidos<br>
         <input type="mail" name="email" id="inputEmail">Correo<br>
         <button id="btnVolver">Volver</button>
-        <button id="btnGuardar">Guardar usuario</button>
+        <button id="btnGuardar" type="button">Guardar usuario</button>
     </form>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
-
-            //recuperamos 
+          
+            //recuperamos datos del boton editar (EJ 5)
             const params = new URLSearchParams(window.location.search);
             var idUsuario = params.get('id');
 
+            if(idUsuario != null){
+                $.get("https://reqres.in/api/users", (respuesta, estado) => {
+                   
+                    var nomRecup = respuesta.data[idUsuario-1].first_name;
+                    var apellRecup = respuesta.data[idUsuario-1].last_name;
+                    var mailRecup = respuesta.data[idUsuario-1].email;                  
+                 
+                    $("#inputNombre").val(nomRecup);
+                    $("#inputApellidos").val(apellRecup);
+                    $("#inputEmail").val(mailRecup);
+                });                
+            }
 
             //boton 1
-            $(btnVolver).click(() => {
+            $("#btnVolver").click(() => {
                 history.back();
             });
 
             //boton 2
-            $(btnGuardar).click(() => {
+            $("#btnGuardar").click(() => {
 
                 var nombreUsuario = $("#inputNombre").val();
-                //var nombre = $(inputNombre).val();
 
                 var apellidosUsuario = $("#inputApellidos").val();
                 var emailUsuario = $("#inputEmail").val();
 
-                alert("tenemos: " + nombreUsuario + ", " + apellidosUsuario + ", " + emailUsuario);
+                var nuevoUsuario = {
+                    first_name: nombreUsuario,
+                    last_name: apellidosUsuario,
+                    email: emailUsuario
+                };
 
-                $.ajax({
-                    url: "https://reqres.in/api/users",
-                    type: "PUT",
-                    data: {
-                        first_name: nombreUsuario,
-                        last_name: apellidosUsuario,
-                        email: emailUsuario
+                //comprobamos si existe el usuario
+                $.get("https://reqres.in/api/users", (respuesta, estado) => {
+                   
 
-                    },
-                    success: function (response) {
-                        console.log(response);
-                        alert(response);
-                    }
+                    
+               });   
+
+               
+
+                $.post("https://reqres.in/api/users", nuevoUsuario, function (data, status) {
+                    alert("usuario creado: " + JSON.stringify(data));
+                    window.history.back();
                 });
 
             });

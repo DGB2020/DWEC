@@ -38,3 +38,11 @@ h2 {
     text-transform: uppercase;
     margin-left: 3em;
 }
+
+input {
+    margin: 1em;
+}
+
+button {
+    margin-top: 1em;
+}
