@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <h1></h1>
     <form action="">
         <input type="text" name="nombre" id="inputNombre">Nombre<br>
         <input type="text" name="apellidos" id=inputApellidos>Apellidos<br>
@@ -20,58 +21,115 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
-          
-            //recuperamos datos del boton editar (EJ 5)
-            const params = new URLSearchParams(window.location.search);
-            var idUsuario = params.get('id');
 
-            if(idUsuario != null){
+            //----------------------------------------FUNCIONES-------------------------------------            
+
+            function inicio() {
+                var creandoNuevo = false;
+                //recuperamos id de usuario si existe
+                const params = new URLSearchParams(window.location.search);
+                var idUsuario = params.get('id');
+
+                if (idUsuario == null) { //la id no existe, estamos creando usuario
+                    creandoNuevo = true;
+                    cambiarTitulo("Crear usuario");
+                } else { //la id existe, estamos modificando usuario existente
+                    recuperarDatosUsuarioExistente(idUsuario);
+                    cambiarTitulo("Modificar usuario");
+                }
+            }//----- inicio end
+
+            function recuperarDatosUsuarioExistente(idUsuario) {
                 $.get("https://reqres.in/api/users", (respuesta, estado) => {
-                   
-                    var nomRecup = respuesta.data[idUsuario-1].first_name;
-                    var apellRecup = respuesta.data[idUsuario-1].last_name;
-                    var mailRecup = respuesta.data[idUsuario-1].email;                  
-                 
+
+                    //data es un array, debemos acceder al indice -1
+                    var nomRecup = respuesta.data[idUsuario - 1].first_name;
+                    var apellRecup = respuesta.data[idUsuario - 1].last_name;
+                    var mailRecup = respuesta.data[idUsuario - 1].email;
+
+                    //escribimos datos a los inputs
                     $("#inputNombre").val(nomRecup);
                     $("#inputApellidos").val(apellRecup);
                     $("#inputEmail").val(mailRecup);
-                });                
+                });
+            }//------- recuperar datos usuario end
+
+            function cambiarTitulo(texto) {
+                $("h1").text(texto);
             }
 
-            //boton 1
+            //llamada con BOTON 2
+            function procesarDatosUsuario() {
+
+                //1. recoger de los inputs
+                var nombreUsuario = $("#inputNombre").val();
+                var apellidosUsuario = $("#inputApellidos").val();
+                var emailUsuario = $("#inputEmail").val();
+
+                var nuevosDatosUsuario = {
+                    first_name: nombreUsuario,
+                    last_name: apellidosUsuario,
+                    email: emailUsuario
+                }
+
+                if (window.creandoNuevo) {
+                    insercionREST( 'POST',nuevosDatosUsuario,);
+
+                } else { //si no estamos creando usuario nuevo  cogemos la id
+                    //la añadimos al objeto de datos de usuario y la usamos en la url también
+                    nuevosDatosUsuario.id = window.idUsuario;
+                    insercionREST('PUT',nuevosDatosUsuario,nuevosDatosUsuario.id);
+
+                }
+
+            }//----- procesar datos usuario end
+
+            function insercionREST(metodo, datos, id) {
+
+                // si nos pasan el parametro id lo añadimos a la url
+                //mejor cambir por mirar la id dentro del usuario
+                var urlFinal ='https://reqres.in/api/users/';
+                if(id != null && !isNaN){
+                    urlFinal += id;
+                }
+
+                $.ajax({
+                    url: urlFinal,
+                    type: metodo,
+                    data: datos,
+                    success: function (response) {
+                        // funcion callback
+                        console.log("Data: " + response);
+                        console.dir(response);
+                        alert("usuario modificado: " + JSON.stringify(response));
+                        window.history.back();
+                    },
+                    error: function (response) {
+                        console.log(response);
+                        alert("Se ha producido un error en el backend!");
+                    }
+
+                });
+
+            }//--------insercion rest end
+
+
+            //---------------------------------------ACCIONES BOTONES------------------------------
+
+            //BOTON 1 - VOLVER
             $("#btnVolver").click(() => {
                 history.back();
             });
 
-            //boton 2
+            //BOTON 2 - GUARDAR
             $("#btnGuardar").click(() => {
-
-                var nombreUsuario = $("#inputNombre").val();
-
-                var apellidosUsuario = $("#inputApellidos").val();
-                var emailUsuario = $("#inputEmail").val();
-
-                var nuevoUsuario = {
-                    first_name: nombreUsuario,
-                    last_name: apellidosUsuario,
-                    email: emailUsuario
-                };
-
-                //comprobamos si existe el usuario
-                $.get("https://reqres.in/api/users", (respuesta, estado) => {
-                   
-
-                    
-               });   
-
-               
-
-                $.post("https://reqres.in/api/users", nuevoUsuario, function (data, status) {
-                    alert("usuario creado: " + JSON.stringify(data));
-                    window.history.back();
-                });
-
+                procesarDatosUsuario();
             });
+
+
+            //---------------------------------------EJECUCIÓN--------------------------------------
+
+            inicio();
 
         });
     </script>
