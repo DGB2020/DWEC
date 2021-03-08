@@ -61,7 +61,7 @@
             //llamada con BOTON 2
             function procesarDatosUsuario() {
 
-                //1. recoger de los inputs
+                // recoger de los inputs
                 var nombreUsuario = $("#inputNombre").val();
                 var apellidosUsuario = $("#inputApellidos").val();
                 var emailUsuario = $("#inputEmail").val();
@@ -72,25 +72,25 @@
                     email: emailUsuario
                 }
 
-                if (window.creandoNuevo) {
+                if (window.creandoNuevo) { //estamos creando un usuairo nuevo, no necesitamos la id
                     insercionREST( 'POST',nuevosDatosUsuario,);
 
-                } else { //si no estamos creando usuario nuevo  cogemos la id
-                    //la añadimos al objeto de datos de usuario y la usamos en la url también
+                } else { // no estamos creando usuario nuevo, necesitamos la id
                     nuevosDatosUsuario.id = window.idUsuario;
-                    insercionREST('PUT',nuevosDatosUsuario,nuevosDatosUsuario.id);
+                    insercionREST('PUT',nuevosDatosUsuario);
 
                 }
 
             }//----- procesar datos usuario end
 
-            function insercionREST(metodo, datos, id) {
-
-                // si nos pasan el parametro id lo añadimos a la url
-                //mejor cambir por mirar la id dentro del usuario
+            function insercionREST(metodo, datos) {
+    
                 var urlFinal ='https://reqres.in/api/users/';
-                if(id != null && !isNaN){
-                    urlFinal += id;
+
+                // si los datos contienen una id no nula añadimos a la url (estaremos modificando en ese caso)
+
+                if(datos.id != null && !isNaN){
+                    urlFinal += datos.d;
                 }
 
                 $.ajax({

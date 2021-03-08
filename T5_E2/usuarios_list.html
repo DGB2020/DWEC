@@ -30,7 +30,9 @@
                     //creamos la imagen
                     var img = document.createElement("img");
                     img.src = element.avatar;
-                    if(element.first_name == "Janet"){
+
+                    //un poco de estilo extra 
+                    if(element.first_name == "Janet" || element.first_name == "Emma"){
                         $(img).css("border","10px solid transparent");
                         $(img).css("border-image","url('https://i.gyazo.com/thumb/1000/df85ef0903d5ba5e865adb029a8c17bd-png.png') 100% round");
                     }
@@ -57,10 +59,10 @@
                 btnCrear.id = "btnCrear";
                 btnCrear.innerHTML = "Crear usuario";
                 $(btnCrear).click(() => {
-
+                    
                     window.location.assign("usuario_edit.html");
-                    //window.open("usuario.edit.html");
-                });
+            
+                });                
                 $("body").append(btnCrear);
 
             });
