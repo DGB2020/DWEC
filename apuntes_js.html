@@ -1,4 +1,25 @@
 <script>
+    /*
+    ____   ____  __  __ 
+    |  _ \ / __ \|  \/  |
+    | |_) | |  | | \  / |
+    |  _ <| |  | | |\/| |
+    | |_) | |__| | |  | |
+    |____/ \____/|_|  |_|                                          
+    */
+
+
+    
+    /*
+     _____   ____  __  __ 
+    |  __ \ / __ \|  \/  |
+    | |  | | |  | | \  / |
+    | |  | | |  | | |\/| |
+    | |__| | |__| | |  | |
+    |_____/ \____/|_|  |_|                                              
+    */
+
+
     //ESCOGER NODOS
     document.querySelector("div")
     getElementsByClassName('importante')[0].innerHTML;
@@ -25,8 +46,13 @@
         inpuC.innerHTML = "error";
     }
 
-    //-----------------OBJETOS----------------------------
-
+    /*____  ____       _ ______ _______ ____   _____ 
+     / __ \|  _ \     | |  ____|__   __/ __ \ / ____|
+    | |  | | |_) |    | | |__     | | | |  | | (___  
+    | |  | |  _ < _   | |  __|    | | | |  | |\___ \ 
+    | |__| | |_) | |__| | |____   | | | |__| |____) |
+     \____/|____/ \____/|______|  |_|  \____/|_____/                                                                                                   
+    */
 
     var objeto = {
         propiedad: "valor",
@@ -44,87 +70,102 @@
     }
     var objeto1 = new Objeto("algo", false);
 
+    //copia referencia----------------------------------------------------------------------------------------
+    var copiacoche1referencia = coche1;
+    //copia a traves del constructor
+    var copiacoche1constructor = new Coche(coche1.modelo, coche1.color, coche1.kms, coche1.arrancado);
+    //copia del objeto recorriendo propiedades
+    var copiacoche1forin = new Coche();
+    for (var propiedad in coche1) {
+        copiacoche1forin[propiedad] = coche1[propiedad];
+    }
+    //copia objetct assign
+    var copiacoche1objetassign = Object.assign(new Coche(), coche1);
 
- //copia referencia----------------------------------------------------------------------------------------
-var copiacoche1referencia = coche1;
-//copia a traves del constructor
-var copiacoche1constructor = new Coche(coche1.modelo, coche1.color, coche1.kms, coche1.arrancado);
-//copia del objeto recorriendo propiedades
-var copiacoche1forin = new Coche();
-for (var propiedad in coche1) {
-copiacoche1forin[propiedad] = coche1[propiedad];
-}
-//copia objetct assign
-var copiacoche1objetassign = Object.assign(new Coche(), coche1);   
+    /*
+    ________      ________ _   _ _______ ____   _____ 
+     |  ____\ \    / /  ____| \ | |__   __/ __ \ / ____|
+     | |__   \ \  / /| |__  |  \| |  | | | |  | | (___  
+     |  __|   \ \/ / |  __| | . ` |  | | | |  | |\___ \ 
+     | |____   \  /  | |____| |\  |  | | | |__| |____) |
+     |______|   \/   |______|_| \_|  |_|  \____/|_____/                                                         
+    */
 
-    //jquery link
+    boton2.addEventListener("click", cambiarVisibilidad, false);
 
-    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    document.getElementById("mienlace").addEventListener('click', alertar, false);
 
-
-
-//EVENTOS----------------------------------------------------------------------
-boton2.addEventListener("click", cambiarVisibilidad, false);
-
-document.getElementById("mienlace").addEventListener('click',alertar,false);
-
-
-//añadir evento y pasar evento como parametro
-document.getElementById("miboton").addEventListener("click", (e) => {
-if (e == window.event) {
-console.log("es igual al ultimo");
-console.dir(e.target);
-}
-}, false);
-
-
-//jquery declarar
-$(document).ready(function () {});
-
-document.createElement("li");
-lista.appendChild(elementoLista);
+    //añadir evento y pasar evento como parametro
+    document.getElementById("miboton").addEventListener("click", (e) => {
+        if (e == window.event) {
+            console.log("es igual al ultimo");
+            console.dir(e.target);
+        }
+    }, false);
 
 
-
-//escoger elementos JQUERY
-$("body")
-
+    document.createElement("li");
+    lista.appendChild(elementoLista);
 
 
+    /*             _         __   __
+         /\       | |  /\    \ \ / /
+        /  \      | | /  \    \ V / 
+       / /\ \ _   | |/ /\ \    > <  
+      / ____ \ |__| / ____ \  / . \ 
+     /_/    \_\____/_/    \_\/_/ \_\                                                            
+    */
 
-//evento JQUERY
-$(btnCrear).click(() => {
+    function getUsuarios() {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () { // función callback (procesa la respuesta) //
+            if (this.readyState == 4 && this.status == 200) {
 
-});
+                console.log(this.responseText); // mostramos la respuesta por log de consola //
+                var response = JSON.parse(this.responseText); // transforma el texto en un objeto //
+                console.dir(response);
+            }
 
-//AJAX VIEJUNO
-function getUsuarios () {
-var xmlhttp = new XMLHttpRequest();
-xmlhttp.onreadystatechange = function() { // función callback (procesa la respuesta) //
-if (this.readyState == 4 && this.status == 200) {
+        };
+        xmlhttp.open("GET", "https://reqres.in/api/users", true); // true indica peticion async //
 
-console.log(this.responseText); // mostramos la respuesta por log de consola //
-var response = JSON.parse(this.responseText); // transforma el texto en un objeto //
-console.dir(response);
-}8
-};
-xmlhttp.open("GET", "https://reqres.in/api/users", true); // true indica peticion async //
+        xmlhttp.send();
+    }
 
-xmlhttp.send();
-}
-</script //AJAX JQUERY $.get("url", function (data, status) { console.log("Data: " + data + " \nStatus: " + status);
+    /*     _  ____  _    _ ______ _______     __
+          | |/ __ \| |  | |  ____|  __ \ \   / /
+          | | |  | | |  | | |__  | |__) \ \_/ / 
+      _   | | |  | | |  | |  __| |  _  / \   /  
+     | |__| | |__| | |__| | |____| | \ \  | |   
+      \____/ \___\_\\____/|______|_|  \_\ |_|                                                                                                                         
+    */
+
+    /*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">*/ //enlace jquery
+
+    $(document).ready(function () {}); //funcion inicial jquery
+
+    $("body") //seleccionar
+
+    $(btnCrear).click((e) => { //evento con parametro
+
+    });
+
+
+    $.get("url", function (data, status) {
+        console.log("Data: " + data + " \nStatus: " + status);
         console.dir(data);
         response.data.forEach(element => {});
     });
 
-$.post(" https://reqres.in/api/users", nuevoUsuario, function(data, status) { // funcion callback
-    console.log("Data: " + data + " \nStatus: " + status);
- console.log(status);
- console.dir(data);
- alert(" usuario creado: " + JSON.stringify(data));
- });
 
-    //AJAX JQUERY OTROS METODOS
+    $.post(" https://reqres.in/api/users", nuevoUsuario, function (data, status) { // funcion callback
+        console.log("Data: " + data + " \nStatus: " + status);
+        console.log(status);
+        console.dir(data);
+        alert(" usuario creado: " + JSON.stringify(data));
+    });
+
+
     $.ajax({
         url: urlFinal,
         type: metodo,
@@ -138,4 +179,6 @@ $.post(" https://reqres.in/api/users", nuevoUsuario, function(data, status) { //
         },
         error: function (response) {
             console.log(response);
-            alert(" Se ha producido un error en el backend!"); } }); </script>
+            alert(" Se ha producido un error en el backend!");
+        }
+    });
