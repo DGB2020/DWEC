@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <select name="provincias" id="selectProvincias">
+        <option value="">Escoja provincia</option>
+    </select>
+
+    <select name="municipios" id="selectMunicipios">
+        <option value="">Escoja municipio</option>
+    </select>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(() => {
+
+            //1. FUNCIONES
+            function llenarSelectProvincias() { //llena desde la url del primer parametro el select de segundo parametro con _options_
+                $.get('getProvinciasJSON.php', function (data, status) {
+
+                    var objetoJSON = JSON.parse(data);
+
+                    objetoJSON.provincias.forEach(element => {
+
+                        var option = document.createElement("option");
+                        $(option).val(element.codigo);
+                        $(option).text(element.nombre);
+                        $(selectProvincias).append(option);
+
+                    });
+
+                });
+            }
+
+            function llenarSelectMunicipios(idProvincia) { 
+
+                var datosPost = {
+                    provincia:idProvincia};
+
+                $.post('getMunicipiosJSON.php',datosPost, function (response, status) {
+
+            
+                    var objetoJSON = JSON.parse(response);
+
+                    console.dir(objetoJSON);
+                
+                    objetoJSON.municipios.forEach(element => {
+
+                        var option = document.createElement("option");
+                        $(option).val(element.codigo);
+                        $(option).text(element.nombre);
+                        $(selectMunicipios).append(option);
+
+                    });
+                      
+                });
+            }
+
+
+            //2- evemtps
+            $(selectProvincias).change((event) =>{
+
+                var codigo = event.target.value;
+                llenarSelectMunicipios(codigo);
+
+            });
+
+            //3. LLENAR PRIMER SELECT
+
+            llenarSelectProvincias();
+            llenarSelectMunicipios(11);
+          
+
+
+
+
+
+
+        });
+    </script>
+</body>
+
+</html>
