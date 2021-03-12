@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body onload="">
+    <h1>HTTPResponse:</h1>
+    <!-- En este párrafo ha de aparecer el JSON de respuesta -->
+    <p id="respuestaJSON"></p>
+    <button type="button" onclick="getUsuario()">(GET) Usuarios</button>
+    <button type="button" onclick="getUsuarios(1)">(GET) Usuario con id=1 </button>
+    <button type="button" onclick="crearUsuario('Yo','Alumno')">(POST) Crear alumno #tuNombre</button>
+    <div id="datos"></div>
+    <script>
+        function getUsuario() {
+
+            var panelEscritura = document.getElementById('respuestaJSON');
+            panelEscritura.innerHTML = "";
+            var panelDatos = document.getElementById("datos");
+            panelDatos.innerHTML = "";
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () { // función callback (procesa la respuesta) //
+                if (this.readyState == 4 && this.status == 200) {
+                    var responseObject = JSON.parse(this.responseText); // transforma el texto en un objeto //
+                    document.getElementById('respuestaJSON').innerHTML = this.responseText;
+                    for (let index = 0; index < responseObject.data.length; index++) {
+                        var usuario = responseObject.data[index];
+
+                        var h2 = document.createElement("h2");
+                        h2.textContent = usuario.first_name + " " + usuario.last_name
+
+                        var img = document.createElement("img");
+                        img.src = usuario.avatar;
+
+                        var p = document.createElement("p");
+                        p.textContent = usuario.email;
+
+                        panelDatos.appendChild(h2);
+                        panelDatos.appendChild(img);
+                        panelDatos.appendChild(p);
+
+                    }
+                }
+            };
+            xmlhttp.open("GET", "https://reqres.in/api/users", true); // true indica peticion async //
+            xmlhttp.send();
+        }
+
+        function getUsuarios(idUsuario) {
+
+            var panelEscritura = document.getElementById('respuestaJSON');
+            panelEscritura.innerHTML = "";
+            var panelDatos = document.getElementById("datos");
+            panelDatos.innerHTML = "";
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () { // función callback (procesa la respuesta) //
+                if (this.readyState == 4 && this.status == 200) {
+                    var responseObject = JSON.parse(this.responseText); // transforma el texto en un objeto //
+                    document.getElementById('respuestaJSON').innerHTML = this.responseText;
+
+                    var usuario = responseObject.data;
+
+                    var h2 = document.createElement("h2");
+                    h2.textContent = usuario.first_name + " " + usuario.last_name
+
+                    var img = document.createElement("img");
+                    img.src = usuario.avatar;
+
+                    var p = document.createElement("p");
+                    p.textContent = usuario.email;
+
+                    panelDatos.appendChild(h2);
+                    panelDatos.appendChild(img);
+                    panelDatos.appendChild(p);
+
+                }
+            };
+            var url = "https://reqres.in/api/users/" + idUsuario;
+            xmlhttp.open("GET", url, true); // true indica peticion async //
+            xmlhttp.send();
+        }
+
+        function crearUsuario(name, job) {
+
+            var panelEscritura = document.getElementById('respuestaJSON');
+            panelEscritura.innerHTML = "";
+            var panelDatos = document.getElementById("datos");
+            panelDatos.innerHTML = "";
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () { // función callback (procesa la respuesta) //
+                if (this.readyState == 4 && this.status == 201) {
+                    panelEscritura.innerHTML = this.response;
+                }
+            };
+            var url = "https://reqres.in/api/users/" + JSON.stringify(name, job);
+            xmlhttp.open("POST", url, true); // true indica peticion async //
+            xmlhttp.send();
+        }
+    </script>
+</body>
+
+</html>
