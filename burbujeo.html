@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +10,8 @@
         #exterior {
             width: 40%;
             background-color: blue;
-            padding: 3em;;
+            padding: 3em;
+            ;
         }
 
         #interior {
@@ -17,34 +19,29 @@
             background-color: pink;
             padding: 1em;
         }
-
     </style>
 </head>
+
 <body>
     <div id="exterior">
         <div id=interior>INTERIOR</div>
     </div>
     <script>
-
         var modoInterior = false;
         var modoExterior = false;
 
 
 
-document.getElementById("interior").addEventListener("click", (e) => {
-                console.log("hola soy interior y mi modo es = " + modoInterior + " da igual no importa");
-            }, modoInterior);
+        document.getElementById("interior").addEventListener("click", (e) => {
+            console.log("hola soy interior y mi modo es = " + modoInterior + " da igual no importa");
+        }, modoInterior);
 
 
         document.getElementById("exterior").addEventListener("click", (e) => {
             console.log("hola soy exterior y mi modo es = " + modoExterior);
 
-            }, modoExterior);
-
-
-
-
-
+        }, modoExterior);
     </script>
 </body>
+
 </html>
