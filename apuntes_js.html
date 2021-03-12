@@ -8,8 +8,23 @@
     |____/ \____/|_|  |_|                                          
     */
 
+    alert(window.location.href);
+    alert(window.location.hostname);
+    alert(window.location.pathname);
+    alert(window.navigator.appName);
+    window.open()
+    window.close()
 
-    
+    history.back() //clic atras
+    history.forward()
+
+    navigator.appName
+    navigator.appCodeName
+    navigator.platform
+
+    document.cookie = "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/"; //CREAR
+    document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";//borrAR
+
     /*
      _____   ____  __  __ 
     |  __ \ / __ \|  \/  |
@@ -40,6 +55,10 @@
 
     //TRANFORMAR A ARRAY Y DEJARSE DE ROLLOS
     var arrayForms = Array.from(formularios);
+
+    document.createElement(element) 	
+document.removeChild(element) 	
+document.appendChild(element)
 
     //validar regexp
     if (/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(inpuC)) {
@@ -90,6 +109,10 @@
      | |____   \  /  | |____| |\  |  | | | |__| |____) |
      |______|   \/   |______|_| \_|  |_|  \____/|_____/                                                         
     */
+
+    //<body onload="checkCookies()"> 
+
+    //burbujeo: cuenta el evento del exterior -> por defecto=false=burbujeo, si es true modo captura
 
     boton2.addEventListener("click", cambiarVisibilidad, false);
 
