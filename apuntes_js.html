@@ -23,7 +23,7 @@
     navigator.platform
 
     document.cookie = "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/"; //CREAR
-    document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";//borrAR
+    document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; //borrAR
 
     /*
      _____   ____  __  __ 
@@ -56,9 +56,9 @@
     //TRANFORMAR A ARRAY Y DEJARSE DE ROLLOS
     var arrayForms = Array.from(formularios);
 
-    document.createElement(element) 	
-document.removeChild(element) 	
-document.appendChild(element)
+    document.createElement(element)
+    document.removeChild(element)
+    document.appendChild(element)
 
     //validar regexp
     if (/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(inpuC)) {
